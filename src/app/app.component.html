@@ -1,0 +1,26 @@
+<h2 id="heading">Notification Schedular</h2>
+<div class="container-fluid">
+  <br />
+  <div class="notification-container" *ngFor="let schedule of companyData">
+    <h5>Days to block {{ schedule.companyName }} {{ totalNumberOfDays }}</h5>
+    <div
+      class="notification"
+      [ngClass]="isCompleted(notification, last)"
+      *ngFor="
+        let notification of schedule.notifications;
+        let first = first;
+        let last = last;
+        let i = index
+      "
+    >
+      <div class="icon-holder"></div>
+      <p *ngIf="first">Introduction</p>
+      <p *ngIf="!first">Notification</p>
+      <p>{{ notification }}</p>
+      <span class="difference" [ngClass]="{ first: first }">
+        {{ calculateDiff(notification, schedule.companyId) }} day(s)
+      </span>
+    </div>
+    <br /><br />
+  </div>
+</div>
